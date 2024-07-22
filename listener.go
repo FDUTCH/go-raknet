@@ -143,6 +143,11 @@ func (listener *Listener) Addr() net.Addr {
 	return listener.conn.LocalAddr()
 }
 
+// Block blocks incoming network packets from being processed by the Listener
+func (listener *Listener) Block(addr net.Addr) {
+	listener.sec.block(addr)
+}
+
 // Close closes the listener so that it may be cleaned up. It makes sure the
 // goroutine handling incoming packets is able to be freed.
 func (listener *Listener) Close() error {
